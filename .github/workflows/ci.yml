@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  SERVICE_NAME: ${{ github.event.repository.name }}
+  REPO_OWNER:   ${{ github.repository_owner }}
+  DOCKER_IMAGE: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install uv
+        run: pip install uv
+      - name: Install dependencies
+        run: uv sync
+      - name: Lint & Format
+        run: make lint
+      - name: Test & Coverage
+        run: make test
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Build Docker Image
+        run: make build
+      - name: Publish Docker Image
+        uses: docker/build-push-action@v4
+        with:
+          push: false
+          tags: ghcr.io/${{ github.repository_owner }}/${{ env.SERVICE_NAME }}:latest

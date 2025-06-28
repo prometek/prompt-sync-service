@@ -1,0 +1,5 @@
+site_name: {{ service_name }} Documentation
+nav:
+  - Home: index.md
+markdown_extensions:
+  - admonition

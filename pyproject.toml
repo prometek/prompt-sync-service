@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 88
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]
+
+[project]
+name = "template-python-service"
+version = "0.1.0"
+description = "Template for a Python service"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+keywords = ["template", "python", "service"]
+authors = [
+    {name = "Guillaume Fassot", email = "contact@gfassot.com"},
+]
+dependencies = [
+    "fastapi[standard]",
+    "pydantic",
+    "prometheus-client",
+    "black",
+    "flake8",
+    "pre-commit>=4.2.0",
+    "pytest",
+    "pytest-cov",
+
+]
+
+[tool.uv]

@@ -1,0 +1,26 @@
+{
+  "name": "Python Microservice Dev",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "workspaceFolder": "/workspace",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "python.pythonPath": "/usr/local/bin/python",
+    "editor.formatOnSave": true
+  },
+  "extensions": [
+    "ms-python.python",
+    "ms-azuretools.vscode-docker",
+    "tamasfe.even-better-toml",
+    "njpwerner.autodocstring",
+    "ms-python.vscode-pylance"
+  ],
+  "forwardPorts": [8000],
+  "remoteUser": "vscode",
+  "mounts": [
+    "source=${localEnv:HOME}/.config/nvim,target=/home/vscode/.config/nvim,type=bind,consistency=cached"
+  ],
+}
+}
