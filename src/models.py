@@ -16,6 +16,9 @@ class PromptStatusHistory(SQLModel, table=True):
     status_id: Optional[int] = Field(default=None, foreign_key="status.id", primary_key=True)
     changed_at: datetime = Field(default_factory=datetime.utcnow, primary_key=True)
 
+    prompt: Optional["Prompt"] = Relationship(back_populates="history")
+    status: Optional["Status"] = Relationship(back_populates="history")
+
 # Entités principales
 class Style(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -45,4 +48,4 @@ class Prompt(SQLModel, table=True):
     status: Optional[Status] = Relationship(back_populates="prompts")
     history: List[PromptStatusHistory] = Relationship(back_populates="prompt")
 
-PromptStatusHistory.update_forward_refs()
+PromptStatusHistory.model_rebuild()

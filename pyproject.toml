@@ -29,7 +29,10 @@ dependencies = [
     "pre-commit>=4.2.0",
     "pytest",
     "pytest-cov",
-
+    "sqlmodel>=0.0.24",
+    "pydantic-settings>=2.10.1",
+    "aiosqlite>=0.21.0",
+    "greenlet>=3.2.3",
 ]
 
 [tool.uv]
