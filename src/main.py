@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Response
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 from prometheus_client import Counter, generate_latest, CONTENT_TYPE_LATEST
 
 
